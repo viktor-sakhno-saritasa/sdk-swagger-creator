@@ -1,0 +1,15 @@
+{
+  "generatorName": "typescript-axios",
+  "skipValidateSpec": true,
+  "additionalProperties": {
+    "apiPackage": "api",
+    "modelPackage": "models",
+    "withoutPrefixEnums": true,
+    "withSeparateModelsAndApi": true,
+    "withInterfaces": true,
+    "useSingleRequestParameter": true,
+    "stringEnums": true,
+    "sortParamsByRequiredFlag": true,
+    "sortModelPropertiesByRequiredFlag": true
+  }
+}

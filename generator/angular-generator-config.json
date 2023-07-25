@@ -4,7 +4,6 @@
   "additionalProperties": {
     "fileNaming": "kebab-case",
     "stringEnums": true,
-    "enumNameSuffix": null,
     "modelSuffix": "Dto",
     "modelFileSuffix": ".dto",
     "serviceSuffix": "ApiService",

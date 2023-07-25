@@ -1,6 +1,15 @@
 name: Generate SDK
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      generator:
+        type: choice
+        description: Which generator config should be used to run SDK
+        required: true
+        options:
+          - angular-generator-config.json
+          - react-generator-config.json
+        default: angular-generator-config.json
 
 jobs:
   run-generator:
@@ -24,12 +33,14 @@ jobs:
 
       - name: Generate SDK
         run: |
+          echo "generator=${{ github.event.inputs.generator }}" \
+          &&
           docker run --rm \
           --volume $GITHUB_WORKSPACE/sdk:/local/ \
-          --volume $GITHUB_WORKSPACE/generator/generator-config.json:/sdk/generator-config.json \
+          --volume $GITHUB_WORKSPACE/generator/${{ github.event.inputs.generator }}:/sdk/${{ github.event.inputs.generator }} \
           openapi-generator:latest generate \
           --input-spec ${{ secrets.URL_TO_OPENAPI_SPEC }} \
-          --config /sdk/generator-config.json \
+          --config /sdk/${{ github.event.inputs.generator }} \
 
       - name: Check SDK version
         id: check_sdk_version
