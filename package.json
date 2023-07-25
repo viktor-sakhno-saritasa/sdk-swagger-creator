@@ -7,7 +7,6 @@
     "type": "git",
     "url": "https://github.com/viktor-sakhno-saritasa/sdk-swagger-creator.git"
   },
-  "version": "1.0.0",
   "description": "SDK for `package-name` project",
   "main": "sdk/index.ts",
   "scripts": {
