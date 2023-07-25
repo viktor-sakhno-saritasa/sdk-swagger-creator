@@ -1,5 +1,5 @@
 {
-  "name": "@package/package-name",
+  "name": "@sakhnovict/sdk",
   "publishConfig": {
     "access": "public"
   },
@@ -13,6 +13,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Package",
+  "author": "sakhnovict",
   "license": "MIT"
 }
