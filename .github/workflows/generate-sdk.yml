@@ -1,0 +1,46 @@
+name: Generate SDK
+on:
+  workflow_dispatch
+
+jobs:
+  run-generator:
+    name: Generate SDK
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit
+      # and push the added or changed files to the repository.
+      contents: write
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Build SDK generator
+        run: |
+          docker build . \
+          --file generator/Dockerfile \
+          --tag openapi-generator:latest
+
+      - name: Generate SDK
+      # TODO: Move ----input-spec param to GH Secrets
+        run: |
+          docker run --rm \
+          --volume $GITHUB_WORKSPACE/sdk:/local/ \
+          --volume $GITHUB_WORKSPACE/generator/generator-config.json:/sdk/generator-config.json \
+          openapi-generator:latest generate \
+          --input-spec https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.yaml \
+          --config /sdk/generator-config.json \
+
+      - name: Check SDK version
+        id: check_sdk_version
+        run: |
+           echo "sdk_version=$(cat ./package.json | grep -oP '(?<="version": ")([\d\.]+)(?=")')" >> $GITHUB_OUTPUT
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+            push_options: '--force'
+            commit_message: Update SDK
+            branch: develop
+            tagging_message: ${{ steps.check_sdk_version.outputs.sdk_version }}
