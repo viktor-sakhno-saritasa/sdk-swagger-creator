@@ -39,7 +39,7 @@ jobs:
           --volume $GITHUB_WORKSPACE/sdk:/local/ \
           --volume $GITHUB_WORKSPACE/generator/${{ github.event.inputs.generator }}:/sdk/${{ github.event.inputs.generator }} \
           openapi-generator:latest generate \
-          --input-spec https://api.hmn.saritasa.rocks/api/v1/open-api/schema/ \
+          --input-spec ${{ secrets.URL_TO_OPENAPI_SPEC }} \
           --config /sdk/${{ github.event.inputs.generator }} \
           --git-user-id ${{ github.actor }} \
           --git-repo-id ${{ github.event.repository.name }} \
@@ -47,7 +47,7 @@ jobs:
       - name: Check SDK version
         id: check_sdk_version
         run: |
-           echo "sdk_version=$(cat ./sdk/package.json | grep -oP '(?<=version: )([\d\.]+)')" >> $GITHUB_OUTPUT
+           echo "sdk_version=$(cat sdk/package.json | grep -oP '(?<="version": ")([\d\.]+)(?=")')" >> $GITHUB_OUTPUT
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
