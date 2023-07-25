@@ -2,7 +2,7 @@
   "generatorName": "typescript-redux-query",
   "skipValidateSpec": true,
   "additionalProperties": {
-    "npmName": "@sakhnovict/sdk",
+    "npmName": "@sakhnovict/sdk-example",
     "apiPackage": "api",
     "modelPackage": "models",
     "withoutPrefixEnums": true,
