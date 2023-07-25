@@ -1,7 +1,8 @@
 {
-  "generatorName": "typescript-axios",
+  "generatorName": "typescript-redux-query",
   "skipValidateSpec": true,
   "additionalProperties": {
+    "npmName": "@sakhnovict/sdk",
     "apiPackage": "api",
     "modelPackage": "models",
     "withoutPrefixEnums": true,
