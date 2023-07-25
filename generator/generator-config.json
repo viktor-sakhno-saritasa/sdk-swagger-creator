@@ -1,3 +1,17 @@
 {
-  "generatorName": "typescript-angular"
+  "generatorName": "typescript-angular",
+  "skipValidateSpec": true,
+  "additionalProperties": {
+    "fileNaming": "kebab-case",
+    "stringEnums": true,
+    "enumNameSuffix": null,
+    "modelSuffix": "Dto",
+    "modelFileSuffix": ".dto",
+    "serviceSuffix": "ApiService",
+    "serviceFileSuffix": "-api.service",
+    "withInterfaces": true,
+    "useSingleRequestParameter": true,
+    "sortParamsByRequiredFlag": true,
+    "sortModelPropertiesByRequiredFlag": true
+  }
 }

@@ -23,19 +23,18 @@ jobs:
           --tag openapi-generator:latest
 
       - name: Generate SDK
-      # TODO: Move ----input-spec param to GH Secrets
         run: |
           docker run --rm \
           --volume $GITHUB_WORKSPACE/sdk:/local/ \
           --volume $GITHUB_WORKSPACE/generator/generator-config.json:/sdk/generator-config.json \
           openapi-generator:latest generate \
-          --input-spec https://raw.githubusercontent.com/openapitools/openapi-generator/master/modules/openapi-generator/src/test/resources/3_0/petstore.yaml \
+          --input-spec ${{ secrets.URL_TO_OPENAPI_SPEC }} \
           --config /sdk/generator-config.json \
 
       - name: Check SDK version
         id: check_sdk_version
         run: |
-           echo "sdk_version=$(cat ./package.json | grep -oP '(?<="version": ")([\d\.]+)(?=")')" >> $GITHUB_OUTPUT
+           echo "sdk_version=$(wget -q -O - ${{ secrets.URL_TO_OPENAPI_SPEC }} | grep -oP '(?<=version: )([\d\.]+)')" >> $GITHUB_OUTPUT
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
