@@ -6,6 +6,8 @@ on:
         type: choice
         description: Which generator config should be used to run SDK
         required: true
+        # To use another generator just create needed config
+        # and add file name as option.
         options:
           - angular-generator-config.json
           - react-generator-config.json
@@ -41,7 +43,7 @@ jobs:
           openapi-generator:latest generate \
           --input-spec ${{ secrets.URL_TO_OPENAPI_SPEC }} \
           --config /sdk/${{ github.event.inputs.generator }} \
-          --git-user-id ${{ github.actor }} \
+          --git-user-id ${{ github.repository_owner }} \
           --git-repo-id ${{ github.event.repository.name }} \
 
       - name: Check SDK version
