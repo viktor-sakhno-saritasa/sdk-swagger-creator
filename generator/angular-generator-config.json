@@ -2,7 +2,7 @@
   "generatorName": "typescript-angular",
   "skipValidateSpec": true,
   "additionalProperties": {
-    "npmName": "@sakhnovict/sdk-example",
+    "npmName": "@sakhnovict/sdk-example-1",
     "fileNaming": "kebab-case",
     "stringEnums": true,
     "modelSuffix": "Dto",
