@@ -54,7 +54,6 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-            push_options: '--force'
             commit_message: Update SDK
             branch: develop
             tagging_message: ${{ steps.check_sdk_version.outputs.sdk_version }}
